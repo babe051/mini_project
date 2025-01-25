@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Vos Emprunts</h2>
+
+    {% for emprunt in emprunts %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ emprunt.book.titre }}</h5>
+            <p class="card-text">
+                <strong>Date d'Emprunt:</strong> {{ emprunt.date_emprunt|date:"Y-m-d H:i" }}<br>
+                <strong>Date de Retour Prévue:</strong> {{ emprunt.date_retour_prevue|date:"Y-m-d" }}<br>
+                
+                {% if emprunt.date_retour_reelle %}
+                    <strong>Date de Retour Réelle:</strong> {{ emprunt.date_retour_reelle|date:"Y-m-d" }}
+                {% else %}
+                    <a href="{% url 'return_book' emprunt.id %}" class="btn btn-primary">Marquer comme Retourné</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

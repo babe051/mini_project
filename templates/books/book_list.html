@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Book List</h1>
+<a href="{% url 'book_create' %}" class="btn btn-primary">Ajouter Book</a>
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Autheur</th>
+            <th>Genre</th>
+            <th>Annee</th>
+            <th>Copies</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.titre }}</td>
+            <td>{{ book.auteur }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.annee_publication }}</td>
+            <td>{{ book.exemplaires_disponibles }}</td>
+            <td>
+                <a href="{% url 'book_update' book.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'book_delete' book.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Tous les Emprunts</h2>
+
+    {% if emprunts %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Titre du Livre</th>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Date d'Emprunt</th>
+                <th scope="col">Date </th>
+                <th scope="col">Date de retour</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in emprunts %}
+            <tr>
+                <td>{{ emprunt.book.titre }}</td>
+                <td>{{ emprunt.user.nom }}</td>
+                <td>{{ emprunt.date_emprunt|date:"Y-m-d" }}</td>
+                <td>{{ emprunt.date_retour_prevue|date:"Y-m-d" }}</td>
+                <td>
+                    {% if emprunt.date_retour_reelle %}
+                        {{ emprunt.date_retour_reelle|date:"Y-m-d" }}
+                    {% else %}
+                        <span class="text-warning">Non retourné</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not emprunt.date_retour_reelle %}
+                        <a href="{% url 'approve_reject_emprunt' emprunt.id %}" class="btn btn-primary btn-sm">Approuver/Rejeter</a>
+                        <!-- <a href="{% url 'return_book' emprunt.id %}" class="btn btn-primary">Marquer comme Retourné</a> -->
+                    {% else %}
+                        <span class="badge bg-success">Retourner</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="text-muted">Aucun emprunt disponible.</p>
+    {% endif %}
+</div>
+{% endblock %}

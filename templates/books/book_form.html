@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% if book %}Edit Book{% else %}Ajouter un livre{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="titre" class="form-label">Titre</label>
+        <input type="text" id="titre" name="titre" class="form-control" value="{{ book.titre|default:"" }}">
+    </div>
+    <div class="mb-3">
+        <label for="auteur" class="form-label">Autheur</label>
+        <input type="text" id="auteur" name="auteur" class="form-control" value="{{ book.auteur|default:"" }}">
+    </div>
+    <div class="mb-3">
+        <label for="genre" class="form-label">Genre</label>
+        <input type="text" id="genre" name="genre" class="form-control" value="{{ book.genre|default:"" }}">
+    </div>
+    <div class="mb-3">
+        <label for="annee_publication" class="form-label">Annee</label>
+        <input type="number" id="annee_publication" name="annee_publication" class="form-control" value="{{ book.annee_publication|default:"" }}">
+    </div>
+    <div class="mb-3">
+        <label for="exemplaires_disponibles" class="form-label">Copies</label>
+        <input type="number" id="exemplaires_disponibles" name="exemplaires_disponibles" class="form-control" value="{{ book.exemplaires_disponibles|default:"" }}">
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+{% endblock %}

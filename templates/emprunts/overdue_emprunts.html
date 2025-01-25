@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Emprunts en Retard</h2>
+
+    {% if overdue %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Titre du Livre</th>
+                <th>Utilisateur</th>
+                <th>Date d'Emprunt</th>
+                <th>Date de Retour</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in overdue %}
+            <tr>
+                <td>{{ emprunt.book.titre }}</td>
+                <td>{{ emprunt.user.nom }}</td>
+                <td>{{ emprunt.date_emprunt|date:"Y-m-d H:i" }}</td>
+                <td>{{ emprunt.date_retour_prevue|date:"Y-m-d" }}</td>
+                <td class="text-danger">En Retard</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun emprunt en retard pour le moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

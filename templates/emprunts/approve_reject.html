@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Approuver ou Rejeter l'Emprunt</h2>
+    
+    <p>
+        <strong>Titre du Livre :</strong> {{ emprunt.book.titre }}<br>
+        <strong>Utilisateur :</strong> {{ emprunt.user.nom }}<br>
+        <strong>Date d'Emprunt :</strong> {{ emprunt.date_emprunt|date:"Y-m-d" }}<br>
+        <strong>Date de Retour Prévue :</strong> {{ emprunt.date_retour_prevue|date:"Y-m-d" }}<br>
+    </p>
+    
+    {% if error %}
+    <p class="text-danger">{{ error }}</p>
+    {% endif %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between">
+            <button type="submit" name="action" value="approve" class="btn btn-success">Approuver</button>
+            <button type="submit" name="action" value="reject" class="btn btn-danger">Rejeter</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

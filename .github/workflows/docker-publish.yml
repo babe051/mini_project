@@ -16,13 +16,13 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: babe051
+          password:  dckr_pat_p5LsYi5jmFq4tvTb-2sQz3PWa_Q
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mini_projet_django:1.1 .
+          docker build -t babe051/mini_projet_django:1.1 .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/mini_projet_django:1.1
+          docker push babe051/mini_projet_django:1.1
